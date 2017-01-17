@@ -101,7 +101,7 @@ function BouncingCritter() {
 
   BouncingCritter.prototype.act = function(view) {
     if (view.look(this.direction) != " ")
-      this.direction = view.find(" ") | "s"
+      this.direction = view.find(" ") || "s"
     return {type: "move", direction: this.direction}
   }
 
@@ -179,7 +179,7 @@ function View(world, vector) {
 }
 
   View.prototype.look = function(dir) {
-    let target = this.vector.plus(dir)
+    let target = this.vector.plus(directions[dir])
     if (this.world.grid.isInside(target))
       return charFromElement(this.world.grid.get(target))
     else
